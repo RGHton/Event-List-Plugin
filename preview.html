@@ -1,0 +1,2705 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Events List preview</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:52rem;margin:2rem auto;padding:0 1.25rem;color:#111;line-height:1.5}
+h2{margin-top:3rem;padding-bottom:.4rem;border-bottom:2px solid #111}
+code{background:#f3f4f6;padding:.15rem .35rem;border-radius:3px}
+/**
+ * Events List - front end styles.
+ *
+ * Colours and spacing are exposed as custom properties so a theme can restyle
+ * the list without overriding individual rules, e.g.
+ *
+ *   .eventslist { --eventslist-accent: #8a1f61; }
+ */
+
+.eventslist {
+	--eventslist-date-width: 8.5rem;
+	--eventslist-gap: 1.5rem;
+	--eventslist-row-padding: 1.25rem;
+	--eventslist-rule: rgba(0, 0, 0, 0.1);
+	--eventslist-muted: #6b7280;
+	--eventslist-accent: #3c8396;
+	--eventslist-past-opacity: 0.72;
+
+	margin: 0 0 2rem;
+}
+
+/* --- Row ---------------------------------------------------------------- */
+
+.eventslist-event {
+	display: grid;
+	grid-template-columns: var(--eventslist-date-width) minmax(0, 1fr);
+	gap: var(--eventslist-gap);
+	padding: var(--eventslist-row-padding) 0;
+	border-bottom: 1px solid var(--eventslist-rule);
+}
+
+.eventslist-event:first-child {
+	border-top: 1px solid var(--eventslist-rule);
+}
+
+.eventslist-event.is-past {
+	opacity: var(--eventslist-past-opacity);
+}
+
+/* --- Column 1: the date ------------------------------------------------- */
+
+.eventslist-date {
+	display: flex;
+	flex-direction: column;
+	line-height: 1.2;
+}
+
+.eventslist-date-day {
+	font-size: 1.125rem;
+	font-weight: 700;
+	/* Keeps "Feb 27th - Mar 2nd" from breaking awkwardly mid-range. */
+	text-wrap: balance;
+}
+
+.eventslist-date-year {
+	margin-top: 0.15rem;
+	font-size: 0.875rem;
+	font-weight: 400;
+	color: var(--eventslist-muted);
+}
+
+/* --- Column 2: the details ---------------------------------------------- */
+
+.eventslist-details {
+	min-width: 0;
+}
+
+.eventslist-title {
+	margin: 0;
+	font-size: 1.125rem;
+	line-height: 1.3;
+}
+
+.eventslist-meta {
+	margin: 0.3rem 0 0;
+	font-size: 0.9375rem;
+	color: var(--eventslist-muted);
+}
+
+/* A thin separator between the time and the location. */
+.eventslist-meta > span + span::before {
+	content: "\00b7";
+	margin: 0 0.5rem;
+}
+
+.eventslist-description {
+	margin-top: 0.4rem;
+}
+
+.eventslist-description > p {
+	margin: 0 0 0.5rem;
+}
+
+.eventslist-description > p:last-child {
+	margin-bottom: 0;
+}
+
+.eventslist-link-wrap {
+	margin: 0.5rem 0 0;
+}
+
+.eventslist-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	font-weight: 600;
+	color: var(--eventslist-accent);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+}
+
+.eventslist-link:hover,
+.eventslist-link:focus {
+	border-bottom-color: currentColor;
+}
+
+.eventslist-link-arrow {
+	transition: transform 0.15s ease;
+}
+
+.eventslist-link:hover .eventslist-link-arrow {
+	transform: translateX(2px);
+}
+
+.eventslist-empty {
+	margin: 0 0 2rem;
+	color: var(--eventslist-muted);
+}
+
+/* --- Narrow screens: stack the two columns ------------------------------ */
+
+@media screen and (max-width: 600px) {
+	.eventslist-event {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.35rem;
+	}
+
+	.eventslist-date {
+		flex-direction: row;
+		align-items: baseline;
+		gap: 0.4rem;
+	}
+
+	.eventslist-date-year {
+		margin-top: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.eventslist-link-arrow {
+		transition: none;
+	}
+
+	.eventslist-link:hover .eventslist-link-arrow {
+		transform: none;
+	}
+}
+
+</style>
+</head><body>
+<h1>Events List &mdash; shortcode preview</h1><p>Rendered by the plugin&rsquo;s own template code from all 98 events in the export. Today is 1 Oct 2026.</p>
+<h2><code>[eventslist show=&quot;upcoming&quot; order=&quot;asc&quot;]</code></h2>
+		<div class="eventslist eventslist--upcoming">
+					<div class="eventslist-event is-upcoming">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 27th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">The Neuroscience of Purpose: Wired to Become</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">9 am PT</span>
+																	</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/4600?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				</div>
+		<h2><code>[eventslist show=&quot;upcoming&quot;]</code></h2>
+		<div class="eventslist eventslist--upcoming">
+					<div class="eventslist-event is-upcoming">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 27th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">The Neuroscience of Purpose: Wired to Become</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">9 am PT</span>
+																	</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/4600?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				</div>
+		<h2><code>[eventslist show=&quot;past&quot; limit=&quot;8&quot;]</code></h2>
+		<div class="eventslist eventslist--past">
+					<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 23rd</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Brain Aware Training Demo</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8:00 am</span>
+																			<span class="eventslist-location">Online</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://zoom.us/webinar/register/3917870614229/WN_zEMMiMs0TMmw4dFV2dcjrw" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 16th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">The Science of Audacity: Leading with Empathetic Power</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">9:00 am</span>
+																			<span class="eventslist-location">Virtual Webinar</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/4539?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Aug 24th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Hospice of Santa Barbara</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Private Event</span>
+											</p>
+				
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Aug 12th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Training Industry: Voices in L&amp;D: Elevating the Business Impact of Learning</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8:00 AM / 11:00 AM ET</span>
+																			<span class="eventslist-location">Online</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Training Industry
+<p class="title--single">Voices in L&amp;D: Elevating the Business Impact of Learning</p></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://trainingindustry.com/webinar/strategy-alignment-and-planning/voices-in-ld-elevating-the-business-impact-of-learning/" target="_blank" rel="noopener noreferrer">
+							Reserve Your Spot							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">July 29th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Virtual Spotlight Session: The Neuroscience of Change Readiness and Resilience</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8:30 AM PT / 11:30 AM ET</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p>ACMP Global Connect</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://globalconnect2026.eventscribe.net/agenda.asp?BCFO=&amp;pfp=FullSchedule&amp;fa=&amp;fb=&amp;fc=&amp;fd=&amp;all=1" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">July 9th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Addressing Change Fatigue and Burnout: strategies to improve well-being</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8:15 am</span>
+																			<span class="eventslist-location">The University Club 1332 Santa Barbara Street, Santa Barbara, CA 93101</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Addressing Change Fatigue and Burnout: strategies to improve well-being</p>
+<p>Santa Barbara, California</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://lp.constantcontactpages.com/ev/reg/9ywm94c/lp/b727722d-e4c6-44e4-bf3a-1455fddabe21?source_id=04e055d9-d2c0-469a-8375-8c1cb406d269&amp;source_type=em&amp;c=22emR8V7QjZQBWeMXy0-FolAh3NhPYzi1T4tVLx2-Poa5xEg29RYAw==" target="_blank" rel="noopener noreferrer">
+							Register							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 28th – 30th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ASAE Executive Learning Forum</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Ottowa, Canada</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Keynote: The Science of Audacity: Leading with Empathetic Power</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://events.asaecenter.org/event/EVEBBOBWFKTBH/sessions/SESCQ0SIOITXHLITA" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 17th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar: Designing for Change: How to Align Learning to Outcomes That Matter</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">10 am PST/ 1 pm EST</span>
+																			<span class="eventslist-location">Online</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.instructure.com/resources/webinar/designing-change-how-align-learning-outcomes-matter?utm_source=brain_aware_training&amp;utm_medium=referral&amp;utm_campaign=2026_05_no_bus_ip_britt_promo&amp;utm_parentcampaign=2026_03_no_bus_ca_mirror_mirror" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				</div>
+		<h2><code>[eventslist]</code></h2>
+		<div class="eventslist eventslist--all">
+					<div class="eventslist-event is-upcoming">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 27th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">The Neuroscience of Purpose: Wired to Become</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">9 am PT</span>
+																	</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/4600?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 23rd</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Brain Aware Training Demo</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8:00 am</span>
+																			<span class="eventslist-location">Online</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://zoom.us/webinar/register/3917870614229/WN_zEMMiMs0TMmw4dFV2dcjrw" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 16th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">The Science of Audacity: Leading with Empathetic Power</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">9:00 am</span>
+																			<span class="eventslist-location">Virtual Webinar</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/4539?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Aug 24th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Hospice of Santa Barbara</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Private Event</span>
+											</p>
+				
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Aug 12th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Training Industry: Voices in L&amp;D: Elevating the Business Impact of Learning</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8:00 AM / 11:00 AM ET</span>
+																			<span class="eventslist-location">Online</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Training Industry
+<p class="title--single">Voices in L&amp;D: Elevating the Business Impact of Learning</p></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://trainingindustry.com/webinar/strategy-alignment-and-planning/voices-in-ld-elevating-the-business-impact-of-learning/" target="_blank" rel="noopener noreferrer">
+							Reserve Your Spot							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">July 29th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Virtual Spotlight Session: The Neuroscience of Change Readiness and Resilience</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8:30 AM PT / 11:30 AM ET</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p>ACMP Global Connect</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://globalconnect2026.eventscribe.net/agenda.asp?BCFO=&amp;pfp=FullSchedule&amp;fa=&amp;fb=&amp;fc=&amp;fd=&amp;all=1" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">July 9th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Addressing Change Fatigue and Burnout: strategies to improve well-being</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8:15 am</span>
+																			<span class="eventslist-location">The University Club 1332 Santa Barbara Street, Santa Barbara, CA 93101</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Addressing Change Fatigue and Burnout: strategies to improve well-being</p>
+<p>Santa Barbara, California</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://lp.constantcontactpages.com/ev/reg/9ywm94c/lp/b727722d-e4c6-44e4-bf3a-1455fddabe21?source_id=04e055d9-d2c0-469a-8375-8c1cb406d269&amp;source_type=em&amp;c=22emR8V7QjZQBWeMXy0-FolAh3NhPYzi1T4tVLx2-Poa5xEg29RYAw==" target="_blank" rel="noopener noreferrer">
+							Register							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 28th – 30th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ASAE Executive Learning Forum</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Ottowa, Canada</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Keynote: The Science of Audacity: Leading with Empathetic Power</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://events.asaecenter.org/event/EVEBBOBWFKTBH/sessions/SESCQ0SIOITXHLITA" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 17th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar: Designing for Change: How to Align Learning to Outcomes That Matter</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">10 am PST/ 1 pm EST</span>
+																			<span class="eventslist-location">Online</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.instructure.com/resources/webinar/designing-change-how-align-learning-outcomes-matter?utm_source=brain_aware_training&amp;utm_medium=referral&amp;utm_campaign=2026_05_no_bus_ip_britt_promo&amp;utm_parentcampaign=2026_03_no_bus_ca_mirror_mirror" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 11th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">DreamMaker Bath &amp; Kitchen</h3>
+
+				
+									<div class="eventslist-description"><p>Keynote: Science of Emotional Intelligence + Well-Being</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 3rd</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar: The Chemistry of Collaboration: Using Neuroscience to Build High-Performing Teams</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">9 am PT</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/4513?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">May 18th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">2026 ATD ICE</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Los Angeles</span>
+											</p>
+				
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">May 14th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">AITD 2026 Conference</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Australia</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Keynote</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://eventstudio.eventsair.com/aitd-2026" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Apr 1st – 3rd</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Leading From Within</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Santa Barbara, California</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Training on Change Quest®</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Mar 2nd</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">UC Berkeley</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Berkeley, California</span>
+											</p>
+				
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Jan 30th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Association of General Contractors of Utah</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">West Valley City, Utah</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Keynote on The Science of Teams + Collaboration</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Jan 28th</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar on The Science of Change Readiness and Resilience</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">9 am PT</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/4299?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 1st</span>
+											<span class="eventslist-date-year">2025</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">The Science of Emotional Intelligence &amp; Well-Being at Work</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">09:00 AM PT</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p>The Science of Emotional Intelligence &amp; Well-Being at Work</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/4186?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Aug 20th</span>
+											<span class="eventslist-date-year">2025</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar on The Science of Teams and Psychological Safety</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">5:00 pm</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Session: The Science of Teams and Psychological Safety</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/4185?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Aug 11th</span>
+											<span class="eventslist-date-year">2025</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ASAE Annual Meeting</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Los Angeles, CA</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Catalyst: The Science of Emotional Intelligence &amp; Well-Being at Work</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://annual.asaecenter.org/speaker_roster.cfm" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 25th</span>
+											<span class="eventslist-date-year">2025</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">CBTD 2025</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">São Paulo Brazil</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Keynote</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://abtd.com.br/eventos/cbtd-2025" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">May 20th</span>
+											<span class="eventslist-date-year">2025</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD ICE 2025</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">11:30 am</span>
+																			<span class="eventslist-location">Washington DC</span>
+											</p>
+				
+									<div class="eventslist-description"><p><a class="loadbyurl" href="https://atd25.eventscribe.net/ajaxcalls/PresentationInfo.asp?PresentationID=1599862">The Science of Great Teams: How to Create a Culture of Psychological Safety</a></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://atdconference.td.org/program/speakers" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">May 19th</span>
+											<span class="eventslist-date-year">2025</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD ICE 2025</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">3:00 PM ET</span>
+																			<span class="eventslist-location">Washington DC</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Session: The Science of Innovation: Critical Strategies to Empower the Future</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://atdconference.td.org/" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Apr 9th</span>
+											<span class="eventslist-date-year">2025</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar on The Science of Reducing Burnout in Healthcare</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">9 AM PT</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/3989?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Mar 5th</span>
+											<span class="eventslist-date-year">2025</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar on The Science of Great Sales Teams</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">11 am PT</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/3988?gref?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Feb 17th – 19th</span>
+											<span class="eventslist-date-year">2025</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Training 2025 Conference &amp; Expo</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Orlando, Florida</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Session: The Science of Emotional Intelligence & Well-Being at Work</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingconference.com/2025/index.cfm" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Jan 29th</span>
+											<span class="eventslist-date-year">2025</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar on The Neuroscience of Learning</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">5:00 pm</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/3987?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 8th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">11 am PT</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p><p class="zm-form-item__header"><label class="zm-form-item__label" for="topic">Session: </label>Wired to Become: The Neuroscience of Purpose</p></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://zoom.us/webinar/register/6817230678178/WN_B1EvsZEQThOZetUZc11FNQ" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 24th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar with Training Magazine</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">9:00 am</span>
+																			<span class="eventslist-location">Virtual Webinar</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Session: The Neuroscience of Change: Training that Drives Results</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/3821?gref=calendar" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 17th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">City of Mississauga</h3>
+
+				
+									<div class="eventslist-description"><p>Keynote: Wired to Grow 2.0: Critical Updates in the Neuroscience of Learning</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 12th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">National Geographic</h3>
+
+				
+									<div class="eventslist-description"><p>Keynote: Wired to Resist: the neuroscience of change and adaptability</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 10th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Institute for Management Studies</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8 am PT</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Wired to Resist: Leveraging Brain Science for Successful Change</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.ims-online.com/faculty/Dr.-Britt-Andreatta/464" target="_blank" rel="noopener noreferrer">
+							Register							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 5th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">HR50</h3>
+
+				
+									<div class="eventslist-description"><p>Keynote: Change Management + Resilience</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Aug 16th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Defense Language Institute</h3>
+
+				
+									<div class="eventslist-description"><p>Virtual Keynote: Wired to Resist</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Aug 15th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">A Conversation with Dr. Britt Andreatta</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">5:30 pm</span>
+																			<span class="eventslist-location">Workzones (Paseo Nuevo</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Fireside chat and Q&amp;A</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.meetup.com/the-people-culture-meetup/events/302259581/" target="_blank" rel="noopener noreferrer">
+							Attend for free							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 25th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">The Science of Emotional Intelligence and Well-Being</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">11 am PT</span>
+																			<span class="eventslist-location">Virtual Webinar</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://webcasts.td.org/webinar/5350" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 13th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">AITD Conference 2024</h3>
+
+				
+									<div class="eventslist-description"><p>AITD Conference 2024</p>
+<p>Keynote: Wired to Grow</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 5th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">L&amp;D&#039;s Imperative for AI: Upskilling Critical Thinking</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">12:00 pm</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Webinar: L&amp;D's Imperative for AI: Upskilling Critical Thinking</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/3788?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register for free							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">May 20th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD 2024 International Conference &amp; Exposition (ATD24)</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">New Orleans, LA</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Session: The Science of Emotional Intelligence and Well-Being at Work</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://atdconference.td.org/" target="_blank" rel="noopener noreferrer">
+							Register							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">May 2nd</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Institute for Management Studies</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">4:00 pm</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Session: Wired to Resist: The Neuroscience of Change with Dr. Britt Andreatta</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.ims-online.com/faculty/Dr.-Britt-Andreatta/464" target="_blank" rel="noopener noreferrer">
+							Register							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Mar 25th – 29th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Hacking HR&#039;s 2024 Global Conference: The People Summit</h3>
+
+				
+									<div class="eventslist-description"><p>Hacking HR's 2024 Global Conference: The People Summit</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.thepeoplesummit.io/" target="_blank" rel="noopener noreferrer">
+							Register for free							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Mar 19th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">HR50 Workshop</h3>
+
+				
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Mar 6th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD Spring Forum</h3>
+
+				
+									<div class="eventslist-description"><p>ATD Spring Forum</p>
+<p>Session: Learning How to Learn</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://atd-forum.td.org/events" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Feb 28th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Training 2024 Conference &amp; Expo</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8:30 am</span>
+																			<span class="eventslist-location">In-Person</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Session: Wired to Become: The Science of Purpose and Meaningful Work</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingconference.com/2024/sessions_details.cfm" target="_blank" rel="noopener noreferrer">
+							Register							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Feb 7th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD TK 2024</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">1:00 pm</span>
+																			<span class="eventslist-location">Los Angeles, CA</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Virtual Session: The Future of TD: Critical Trends for Our Hybrid World</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://techknowledge.td.org/sessions" target="_blank" rel="noopener noreferrer">
+							Register							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Jan 25th</span>
+											<span class="eventslist-date-year">2024</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">L&amp;D Virtual Conference</h3>
+
+				
+									<div class="eventslist-description"><p>L&amp;D Trend Publication Launch Event</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://vimeo.com/907378183" target="_blank" rel="noopener noreferrer">
+							Watch OnDemand							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 22nd</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Strategic HR 2023</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">In-Person</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Keynote: Wired to Resist: The Neuroscience of Change</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.strategichrus.com/conference/strategic-hr/" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 6th</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Cal Poly Pomona-Women&#039;s Network So Cal - Fall Annual Conference</h3>
+
+				
+									<div class="eventslist-description"><p>Keynote: Finding Purpose and Meaningful Work</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 27th</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Brain-Based Strategies to Address Burnout and Increase Well-Being for Healthcare</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">9:00 am</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/3539?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 20th</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">The Science of Executive Leadership: Training That Drives Organizational Result</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">10:00 am</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://zoom.us/webinar/register/4416890235163/WN_V7GWHRoKQFW-o43k-WzUVw" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 18th</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">City of Mississauga Leadership Conference</h3>
+
+				
+									<div class="eventslist-description"><p>Virtual</p>
+<p>Session: Wired to Grow: The Neuroscience of Learning</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Aug 3rd</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar on Addressing Burnout for Leaders</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8:00 am</span>
+																	</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.sentinelgroup.com/events/2023/addressing-burnout-strategies-for-leaders?returnurl=/employers/events" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 21st</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">AI in Learning by OpenLMS</h3>
+
+				
+									<div class="eventslist-description"><p>Virtual
+<p class="talk-title">Session: The Future of Learning: Trends and tools</p></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.elearnmagazine.com/ai-in-learning-summit/" target="_blank" rel="noopener noreferrer">
+							Register for free							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 12th</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">SHRM Annual Conference</h3>
+
+				
+									<div class="eventslist-description"><p>Las Vegas, NV</p>
+<p>Session:  The Science of Purpose and Meaningful Work</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">May 22nd</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD 2023 International Conference &amp; Exposition</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">San Diego, CA</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Session: The Science of Executive Leadership: Training That Drives Organizational Results</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Apr 25th</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Brain-Based Strategies for your Sales and Marketing Leaders</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">11:00 am</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.smmconnect.com/events/3390?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register here							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Apr 20th</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD: North Dakota Chapter</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Virtual Event</p>
+<p>Session: Spring Mini Conference - Leading Effective Change and Driving Execution &amp; Accountability</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.ndatd.org/event-5184240" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Feb 28th</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Open LMS</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Phoenix, AZ</span>
+											</p>
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://start.openlms.net/2022event/waitlist/" target="_blank" rel="noopener noreferrer">
+							Join the waitlist							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Feb 16th</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">CHRO Conference</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Session: The Neuroscience of Purpose</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Feb 7th</span>
+											<span class="eventslist-date-year">2023</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">2023 ATD TechKnowledge Conference</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">New Orleans, LA</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Supper Session: The Neuroscience of Purpose: Wired to Become 2.0</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Dec 15th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Training Magazine</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">8:00 am</span>
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Webinar: Brain-Based Practices for Leadership Development</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.trainingmagnetwork.com/events/3301?gref=BA" target="_blank" rel="noopener noreferrer">
+							Register for free							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Dec 6th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">All HR Meeting: Future of Work by Southern Company</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Atlanta, GA</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Session: The Science Behind Burnout and Purpose</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Nov 28th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Ernst and Young</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Orlando, FL</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Session: The Neuroscience of Change</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 26th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">DevLearn 2022</h3>
+
+				
+									<div class="eventslist-description"><p>Session: Better Use of Video to Create Effective Training Programs</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://devlearn.com/" target="_blank" rel="noopener noreferrer">
+							Register Today							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 26th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Evergreen</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Virtual (6 month training)</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Training:  for Healthcare Leaders</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.brittandreatta.com/brain-aware-manager-training/" target="_blank" rel="noopener noreferrer">
+							Brain Aware Manager							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 25th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Freddie Mac</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Virtual</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Keynote: The Neuroscience of Teams</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past is-online">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 20th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Webinar with SPOTLYFE</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">11:00 am</span>
+																			<span class="eventslist-location">Virtual via Zoom</span>
+											</p>
+				
+									<div class="eventslist-description"><p><strong>Topic: Burning Out: Exploring the impacts of hustle culture and how to put an end to it</strong></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://us06web.zoom.us/webinar/register/WN_o5KEk0UCTvWRglcTtW-L-A" target="_blank" rel="noopener noreferrer">
+							Register for free							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 13th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">2022 PAEA Education Forum</h3>
+
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://paeaonline.org/events/2022-paea-education-forum" target="_blank" rel="noopener noreferrer">
+							Learn More							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 12th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD OrgDev 2022</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Los Angeles, CA</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Keynote: Cracking The Code: How Organizational Growth And Consciousness Shape Your Talent Development And Learning Strategy</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://orgdev.td.org/" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 11th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD SELL</h3>
+
+									<p class="eventslist-meta">
+																			<span class="eventslist-location">Los Angeles, CA</span>
+											</p>
+				
+									<div class="eventslist-description"><p>Keynote: Neuroscience of Purpose</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://sell.td.org/" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 6th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Cognition 2022</h3>
+
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://cognition.thoughtindustries.com/" target="_blank" rel="noopener noreferrer">
+							Learn More							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Aug 3rd</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD Rocky Mountains Chapter (public event)</h3>
+
+									<p class="eventslist-meta">
+													<span class="eventslist-time">5:00 pm</span>
+																	</p>
+				
+									<div class="eventslist-description"><p>Session: Wired to Resist: The Neuroscience of Change</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.atdrmc.org/event-4831813" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 12th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">SHRM Annual Conference</h3>
+
+				
+									<div class="eventslist-description"><p>Session: The Science of Building a Culture of Innovation</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://annual.shrm.org/" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">May 15th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD International Conference &amp; Expo</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> The Neuroscience of Purpose: Wired to Become 2.0.</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://atdconference.td.org/welcome" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Mar 9th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Brain Aware Training</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Webinar:</strong><em> Tips and Tools to Heal from Burnout.</em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://zoom.us/webinar/register/2216432466094/WN_hE9sOIANSs-hMFg7B_Ip6w" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Mar 2nd</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">HR Tech Conference</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Keynote: </strong>The Neuroscience of Purpose.</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Feb 24th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">People Matters L&amp;D APAC</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Master Class:</strong> <em>Creating a Culture of Continuous Improvement.</em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://sea.lndconference.com/register?type=standard" target="_blank" rel="noopener noreferrer">
+							Get Invited							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Feb 9th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD TK</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Super Session:</strong> <em>Insights from ATD BEST Award: Brain Aware Manager Training. </em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://techknowledge.td.org/live-sessions/insights-from-the-atd-best-award-certification-program-for-brain-based-training?&amp;searchTerm=britt%20andreatta&amp;searchgroup=libraryentry-live-sessions" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Feb 2nd</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Brain Aware Training</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Webinar:</strong><em> Addressing Burnout: Strategies for Leaders During The Great Resignation.</em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://zoom.us/webinar/register/9416421856664/WN_krbsl9t1Tom6cy1XksYZHQ" target="_blank" rel="noopener noreferrer">
+							Register Now							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Jan 11th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Imperative</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Webinar:</strong> Remote Work Strategies: Understanding the Neuroscience of Human Connection.</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://us02web.zoom.us/webinar/register/3816388970704/WN_VAsZa9ZUSW6PwAcNLy2sSg" target="_blank" rel="noopener noreferrer">
+							Watch On Demand							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Jan 11th</span>
+											<span class="eventslist-date-year">2022</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD Central Pennsylvania</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> <em>Moving Through Burnout: Tips and Tools to Thrive in This Unique Time. </em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://centralpaatd.wildapricot.org/calendar" target="_blank" rel="noopener noreferrer">
+							Event Calendar							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Dec 10th</span>
+											<span class="eventslist-date-year">2021</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">AICPA CFO Summit</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Keynote:</strong> <em>The Great Resignation & The Workplace of the Future</em></p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Nov 15th</span>
+											<span class="eventslist-date-year">2021</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Learner Engagement Virtual Summit</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> <em>10 Brain-Based Strategies for Creating Engaging Learning</em></p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 19th</span>
+											<span class="eventslist-date-year">2021</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Inclusion 2021</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Keynote:</strong> <em>The Brain Science of Inclusion: Moving People to Action.</em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.inclusionevent.com/agenda/" target="_blank" rel="noopener noreferrer">
+							Learn More							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 5th</span>
+											<span class="eventslist-date-year">2021</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">SCALED 2021 powered by Whatfix</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> <em>Come Back Stronger: 6 Ways Leaders Can Rebuild Teams in a Hybrid World. </em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.digitaladoption.com/scaled/" target="_blank" rel="noopener noreferrer">
+							Watch On Demand							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 11th</span>
+											<span class="eventslist-date-year">2021</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">SHRM</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> <em>Wired to Connect: The Neuroscience of High-Performing Teams. </em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://conferences.shrm.org/conference/2021-annual-conference-expo/session/wired-connect-neuroscience-high-performing-teams" target="_blank" rel="noopener noreferrer">
+							Learn More							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Aug 29th</span>
+											<span class="eventslist-date-year">2021</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD International Conference &amp; Expo</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> <em>Brain-Based Manager Training: Insights From an ATD BEST-Award Winner. </em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://atd2021.pathable.co/people/XdY4H8fR8geFYYaGu" target="_blank" rel="noopener noreferrer">
+							Watch On Demand							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Apr 20th</span>
+											<span class="eventslist-date-year">2021</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">elearning Success Summit 2.0 Live Summit</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> <em>10-strategies for Creating Engaging Learning. </em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.lmspulse.com/2020/lmspulse-elearningsuccesssummit/" target="_blank" rel="noopener noreferrer">
+							Learn More							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Apr 5th</span>
+											<span class="eventslist-date-year">2021</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Beyond Academia 2021</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> <em>Startups &amp; Entrepreneurship Panel. </em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://beyondacademia.berkeley.edu/events.html" target="_blank" rel="noopener noreferrer">
+							View past events							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Mar 23rd</span>
+											<span class="eventslist-date-year">2021</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD LATAM</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> <em>Wired to Grow 2.0: Critical Updates In The Neuroscience Of Learning. </em></p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://atdglobal.glueup.com/event/atd-2021-latin-america-conference-virtual-27920/agenda.html" target="_blank" rel="noopener noreferrer">
+							View other ATD Global events							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Jan 25th</span>
+											<span class="eventslist-date-year">2021</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD TechKnowledge Conference</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Super Session Keynote:</strong> Wired to Aha! The Neuroscience of Creativity and Innovation.</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Dec 10th</span>
+											<span class="eventslist-date-year">2020</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD Japan</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Keynote:</strong> The Brain Science of Change: How to Thrive in this Time of COVID.</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://japansummit.td.org/" target="_blank" rel="noopener noreferrer">
+							View other ATD Global events							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Nov 18th</span>
+											<span class="eventslist-date-year">2020</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Digital Adoption Day by Whatfix</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> Battling Resistance to Change in Organizations.</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Nov 2nd</span>
+											<span class="eventslist-date-year">2020</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Learning Content Summit by Cornerstone</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> Learning Content Summit: Thriving in a Changing World.</p></div>
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://www.hr.com/en/webcasts_events/virtual_events/upcoming_virtual_events/cornerstone-ondemand%C2%AE-learning-content-summit-thri_kgi6ztlu.html" target="_blank" rel="noopener noreferrer">
+							Watch On Demand							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 14th</span>
+											<span class="eventslist-date-year">2020</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">CTD Virtual Conference 2020</h3>
+
+				
+									<div class="eventslist-description"><p><strong>Session:</strong> Wired to Grow: the Neuroscience of Learning</p></div>
+				
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Oct 8th</span>
+											<span class="eventslist-date-year">2020</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Podcast with Blind Insights</h3>
+
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://omny.fm/shows/blind-insights/blind-insights-rewiring-our-resistance-to-change-s" target="_blank" rel="noopener noreferrer">
+							Rewiring our Resistance to Change							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">Sept 8th</span>
+											<span class="eventslist-date-year">2020</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">Podcast with MBA Insider</h3>
+
+				
+				
+									<p class="eventslist-link-wrap">
+						<a class="eventslist-link" href="https://mbaschooled.com/2020/09/08/episode-39-learning-how-to-learn-in-business-school/" target="_blank" rel="noopener noreferrer">
+							Learning How to Learn in Business School							<span class="eventslist-link-arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				
+			</div>
+
+		</div>
+				<div class="eventslist-event is-past">
+
+			<div class="eventslist-date">
+									<span class="eventslist-date-day">June 1st</span>
+											<span class="eventslist-date-year">2020</span>
+												</div>
+
+			<div class="eventslist-details">
+
+				<h3 class="eventslist-title">ATD Virtual Conference</h3>
+
+				
+									<div class="eventslist-description"><p>Building Capabilities and Connection, June 1-5, 2020. Session: Wired to Aha! The Neuroscience of Creativity and Innovation</p></div>
+				
+				
+			</div>
+
+		</div>
+				</div>
+		</body></html>

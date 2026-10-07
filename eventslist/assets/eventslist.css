@@ -1,0 +1,169 @@
+/**
+ * Events List - front end styles.
+ *
+ * Colours and spacing are exposed as custom properties so a theme can restyle
+ * the list without overriding individual rules, e.g.
+ *
+ *   .eventslist { --eventslist-accent: #8a1f61; }
+ */
+
+.eventslist {
+	--eventslist-date-width: 8.5rem;
+	--eventslist-gap: 1.5rem;
+	--eventslist-row-padding: 1.25rem;
+	--eventslist-rule: rgba(0, 0, 0, 0.1);
+	--eventslist-muted: #6b7280;
+	--eventslist-accent: #3c8396;
+	--eventslist-past-opacity: 0.72;
+
+	margin: 0 0 2rem;
+}
+
+/* --- Row ---------------------------------------------------------------- */
+
+.eventslist-event {
+	display: grid;
+	grid-template-columns: var(--eventslist-date-width) minmax(0, 1fr);
+	gap: var(--eventslist-gap);
+	padding: var(--eventslist-row-padding) 0;
+	border-bottom: 1px solid var(--eventslist-rule);
+}
+
+.eventslist-event:first-child {
+	border-top: 1px solid var(--eventslist-rule);
+}
+
+.eventslist-event.is-past {
+	opacity: var(--eventslist-past-opacity);
+}
+
+/* --- Column 1: the date ------------------------------------------------- */
+
+.eventslist-date {
+	display: flex;
+	flex-direction: column;
+	line-height: 1.2;
+}
+
+.eventslist-date-day {
+	font-size: 1.125rem;
+	font-weight: 700;
+	/* Keeps "Feb 27th - Mar 2nd" from breaking awkwardly mid-range. */
+	text-wrap: balance;
+}
+
+.eventslist-date-year {
+	margin-top: 0.15rem;
+	font-size: 0.875rem;
+	font-weight: 400;
+	color: var(--eventslist-muted);
+}
+
+/* --- Column 2: the details ---------------------------------------------- */
+
+.eventslist-details {
+	min-width: 0;
+}
+
+.eventslist-title {
+	margin: 0;
+	font-size: 22px;
+	line-height: 1.3;
+	color: #3c8396;
+}
+
+.eventslist-meta {
+	margin: 0;
+	font-size: 0.9375rem;
+	color: var(--eventslist-muted);
+}
+
+/* A thin separator between the time and the location. */
+.eventslist-meta > span + span::before {
+	content: "\00b7";
+	margin: 0 0.5rem;
+}
+
+/*
+ * No vertical margins anywhere in the details column, including on whatever
+ * the theme adds to headings and paragraphs, to keep each row tight.
+ */
+.eventslist .eventslist-details > *,
+.eventslist .eventslist-details p {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.eventslist-description,
+.eventslist-link-wrap {
+	margin-top: 0;
+}
+
+.eventslist-description > p {
+	margin: 0;
+}
+
+/* Qualified with the wrapper so the accent wins over the theme's own link colour. */
+.eventslist a.eventslist-link,
+.eventslist a.eventslist-link:visited,
+.eventslist a.eventslist-link:hover,
+.eventslist a.eventslist-link:focus {
+	color: var(--eventslist-accent);
+}
+
+.eventslist-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	font-weight: 600;
+	color: var(--eventslist-accent);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+}
+
+.eventslist-link:hover,
+.eventslist-link:focus {
+	border-bottom-color: currentColor;
+}
+
+.eventslist-link-arrow {
+	transition: transform 0.15s ease;
+}
+
+.eventslist-link:hover .eventslist-link-arrow {
+	transform: translateX(2px);
+}
+
+.eventslist-empty {
+	margin: 0 0 2rem;
+	color: var(--eventslist-muted);
+}
+
+/* --- Narrow screens: stack the two columns ------------------------------ */
+
+@media screen and (max-width: 600px) {
+	.eventslist-event {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.35rem;
+	}
+
+	.eventslist-date {
+		flex-direction: row;
+		align-items: baseline;
+		gap: 0.4rem;
+	}
+
+	.eventslist-date-year {
+		margin-top: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.eventslist-link-arrow {
+		transition: none;
+	}
+
+	.eventslist-link:hover .eventslist-link-arrow {
+		transform: none;
+	}
+}

@@ -1,0 +1,4 @@
+# WordPress export (site data) and build output
+*.xml
+*.zip
+.claude/
