@@ -65,7 +65,8 @@
 	min-width: 0;
 }
 
-.eventslist-title {
+/* Prefixed with the wrapper so theme heading/paragraph rules can't override these. */
+.eventslist .eventslist-title {
 	margin: 0;
 	font-size: 22px;
 	line-height: 1.3;
@@ -94,12 +95,12 @@
 	margin-bottom: 0;
 }
 
-.eventslist-description,
-.eventslist-link-wrap {
+.eventslist .eventslist-description,
+.eventslist .eventslist-link-wrap {
 	margin-top: 0;
 }
 
-.eventslist-description > p {
+.eventslist .eventslist-description > p {
 	margin: 0;
 }
 

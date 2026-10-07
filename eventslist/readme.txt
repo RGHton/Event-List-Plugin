@@ -4,7 +4,7 @@ Tags: events, calendar, shortcode
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -121,6 +121,13 @@ Below 600px the two columns stack.
   importer, since the two-column layout has no image column.
 
 == Changelog ==
+
+= 1.0.2 =
+* Title is 22px in #3c8396; no top margin on the description or link, and
+  no margin on description paragraphs. These rules are now prefixed with
+  `.eventslist` so theme heading and paragraph styles cannot override them.
+* Version bump also makes browsers load the new stylesheet instead of a
+  cached copy.
 
 = 1.0.1 =
 * The year is now shown on every event by default (`year="always"`); use

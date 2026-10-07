@@ -12,7 +12,7 @@
 define( 'ABSPATH', __DIR__ );
 define( 'EVENTSLIST_POST_TYPE', 'eventslist' );
 define( 'EVENTSLIST_URL', '' );
-define( 'EVENTSLIST_VERSION', '1.0.1' );
+define( 'EVENTSLIST_VERSION', '1.0.2' );
 
 // --- Stubs -------------------------------------------------------------------
 
