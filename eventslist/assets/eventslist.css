@@ -42,20 +42,36 @@
 .eventslist-date {
 	display: flex;
 	flex-direction: column;
+	/* Keeps the date block at its own fixed width instead of stretching to the column. */
+	align-items: flex-start;
 	line-height: 1.2;
+}
+
+.eventslist-date-block {
+	display: flex;
+	flex-direction: column;
+	background-color: #e6e6e6;
+	color: #666666;
+	width: 120px;
+	padding: 6px;
+	margin-top: 3px;
+	line-height: 1.2;
+	text-align: center;
 }
 
 .eventslist-date-day {
 	font-size: 1.125rem;
 	font-weight: 700;
+	text-align: center;
 	/* Keeps "Feb 27th - Mar 2nd" from breaking awkwardly mid-range. */
 	text-wrap: balance;
 }
 
 .eventslist-date-year {
 	margin-top: 0.15rem;
-	font-size: 0.875rem;
+	font-size: 1.125rem;
 	font-weight: 400;
+	text-align: center;
 	color: var(--eventslist-muted);
 }
 
@@ -140,22 +156,17 @@
 	color: var(--eventslist-muted);
 }
 
-/* --- Narrow screens: stack the two columns ------------------------------ */
+/* --- Narrow screens: keep two columns, with a narrower date ------------- */
 
 @media screen and (max-width: 600px) {
-	.eventslist-event {
-		grid-template-columns: minmax(0, 1fr);
-		gap: 0.35rem;
+	.eventslist {
+		/* 100px block + 6px padding each side. */
+		--eventslist-date-width: 112px;
+		--eventslist-gap: 0.75rem;
 	}
 
-	.eventslist-date {
-		flex-direction: row;
-		align-items: baseline;
-		gap: 0.4rem;
-	}
-
-	.eventslist-date-year {
-		margin-top: 0;
+	.eventslist-date-block {
+		width: 100px;
 	}
 }
 

@@ -6,7 +6,7 @@ that lists events in a two-column date / details layout.
 
 | | |
 |---|---|
-| **Version** | 1.0.2 |
+| **Version** | 1.0.5 |
 | **Requires WordPress** | 5.8 or later (tested up to 7.1) |
 | **Requires PHP** | 7.4 or later |
 | **License** | [GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html) |
@@ -113,11 +113,13 @@ without fighting specificity:
 Useful classes:
 
 - `.eventslist-event`: each row, plus `.is-past`, `.is-upcoming` and `.is-online`
-- `.eventslist-date`: the first column (`.eventslist-date-day`, `.eventslist-date-year`)
+- `.eventslist-date`: the first column, holding `.eventslist-date-block`
+  (`.eventslist-date-day`, `.eventslist-date-year`)
 - `.eventslist-details`: the second column (`.eventslist-title`,
   `.eventslist-meta`, `.eventslist-description`, `.eventslist-link`)
 
-Below 600px the two columns stack.
+Below 600px the two columns stay side by side, with a narrower (100px) date
+block and a smaller gap.
 
 ## Notes
 
@@ -141,6 +143,21 @@ php tests/preview.php path/to/export.xml > preview.html
 file, so the layout can be checked in a browser before installing the plugin.
 
 ## Changelog
+
+### 1.0.5
+- On screens below 600px the date and details columns no longer stack: they
+  stay side by side, with a 100px date block, a 112px date column and a
+  0.75rem gap.
+
+### 1.0.4
+- The date block is now a fixed 120px wide (was at least 80px), with 6px
+  padding on all sides.
+
+### 1.0.3
+- The day and year are wrapped in a new `.eventslist-date-block`: a grey
+  (#e6e6e6) box, at least 80px wide, with centred text in #666666.
+- The year is now 1.125rem, the same size as the day.
+- Below 600px the day and year stay stacked inside the block.
 
 ### 1.0.2
 - Title is 22px in #3c8396; no top margin on the description or link, and no

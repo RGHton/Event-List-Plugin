@@ -221,10 +221,12 @@ class Eventslist_Shortcode {
 
 			<div class="eventslist-date">
 				<?php if ( '' !== $parts['day'] ) : ?>
-					<span class="eventslist-date-day"><?php echo esc_html( $parts['day'] ); ?></span>
-					<?php if ( $show_year && '' !== $parts['year'] ) : ?>
-						<span class="eventslist-date-year"><?php echo esc_html( $parts['year'] ); ?></span>
-					<?php endif; ?>
+					<div class="eventslist-date-block">
+						<span class="eventslist-date-day"><?php echo esc_html( $parts['day'] ); ?></span>
+						<?php if ( $show_year && '' !== $parts['year'] ) : ?>
+							<span class="eventslist-date-year"><?php echo esc_html( $parts['year'] ); ?></span>
+						<?php endif; ?>
+					</div>
 				<?php endif; ?>
 			</div>
 

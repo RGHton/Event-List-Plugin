@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Events List
  * Description:       A lightweight events manager: an "eventslist" custom post type, an importer for legacy event data from a WordPress export (WXR) file, and an [eventslist] shortcode that renders events in a two-column date / details layout.
- * Version:           1.0.2
+ * Version:           1.0.5
  * Author:            Britt Andreatta
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'EVENTSLIST_VERSION', '1.0.2' );
+define( 'EVENTSLIST_VERSION', '1.0.5' );
 define( 'EVENTSLIST_FILE', __FILE__ );
 define( 'EVENTSLIST_DIR', plugin_dir_path( __FILE__ ) );
 define( 'EVENTSLIST_URL', plugin_dir_url( __FILE__ ) );

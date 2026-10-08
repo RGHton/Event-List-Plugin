@@ -4,7 +4,7 @@ Tags: events, calendar, shortcode
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,7 +109,8 @@ Useful classes: `.eventslist-event` on each row (plus `.is-past`,
 `.is-upcoming` and `.is-online`), `.eventslist-date` for the first column and
 `.eventslist-details` for the second.
 
-Below 600px the two columns stack.
+Below 600px the two columns stay side by side, with a narrower (100px) date
+block and a smaller gap.
 
 == Notes ==
 
@@ -121,6 +122,21 @@ Below 600px the two columns stack.
   importer, since the two-column layout has no image column.
 
 == Changelog ==
+
+= 1.0.5 =
+* On screens below 600px the date and details columns no longer stack: they
+  stay side by side, with a 100px date block, a 112px date column and a
+  0.75rem gap.
+
+= 1.0.4 =
+* The date block is now a fixed 120px wide (was at least 80px), with 6px
+  padding on all sides.
+
+= 1.0.3 =
+* The day and year are wrapped in a new `.eventslist-date-block`: a grey
+  (#e6e6e6) box, at least 80px wide, with centred text in #666666.
+* The year is now 1.125rem, the same size as the day.
+* Below 600px the day and year stay stacked inside the block.
 
 = 1.0.2 =
 * Title is 22px in #3c8396; no top margin on the description or link, and
